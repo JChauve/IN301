@@ -9,29 +9,38 @@ struct Tableau{
 };
 typedef struct Tableau Tableau;
 
-int alea(int n);
-Tableau initialiser(Tableau T);
-void afficher(Tableau T);
-int produit(Tableau T);
+///////////// PROTOTYPES ////////////////////
 
-//fonction Main
+int alea(int n); 
+Tableau initialiser(Tableau T);
+void afficher(Tableau T); 
+long int produit(Tableau T);
+int valMin(Tableau T);
+
+//////////////////////////////////////////
+
+///////////////// MAIN ////////////////////
 int main(){
 
-	srand(time(NULL));
+	srand(time(NULL)); //initialise fct rand().
 	
 	Tableau T;
-	int prod;
+	long int prod;
+	int min;
 	
 	T = initialiser(T);
 	afficher(T);
 	prod = produit(T);
-	printf("Le produit des elements du tableau vaut : %d.", prod);
+	printf("Le produit des elements du tableau vaut : %ld.\n", prod);
+	min = valMin(T);
+	printf("La plus petite valeur du tableau vaut : %d.\n",min);
 	
   return 0;
 }
 
-// Fonctions
-int alea(int n)
+//////////////// FONCTIONS ////////////////
+
+int alea(int n) //renvoie entier aleatoirement entre 0 et n.
 {
 	int a;
 	a = rand() % n;
@@ -49,7 +58,7 @@ Tableau initialiser(Tableau T)
 	return T;
 }
 
-void afficher(Tableau T)
+void afficher(Tableau T) //affiche les elements du tableau.
 {
 	int i;
 	for(i=0; i<T.taille; i++)
@@ -58,9 +67,9 @@ void afficher(Tableau T)
 	}
 }
 
-int produit(Tableau T)
+long int produit(Tableau T)  //calcule le produit des elements du tableau.
 {
-	int resultat=1;
+	long int resultat=1;
 	int i;
 	for(i=0; i<T.taille; i++)
 	{
@@ -68,3 +77,18 @@ int produit(Tableau T)
 	}
 	return resultat;
 }
+
+int valMin(Tableau T) //renvoie la plus petite valeur du tableau.
+{
+	int minTab = T.tab[0];
+	int i;
+	for(i=1; i<T.taille; i++)
+	{
+		if (T.tab[i] <= minTab)
+		{
+			minTab = T.tab[i];
+		}
+	}
+	return minTab;
+}
+
